@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crudflutter/services/firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -9,37 +10,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final FirestoreService firestoreService = FirestoreService();
-
-
 
   final TextEditingController textController = TextEditingController();
 
-
-
-
-  void openNoteBox(){
+  void openNoteBox() {
     showDialog(
-      context: context, 
+      context: context,
       builder: (context) => AlertDialog(
-      content: TextField(
-        controller: textController,
-      ),
+        content: TextField(controller: textController),
         actions: [
-          ElevatedButton(onPressed: () {
-            firestoreService.addNote(textController.text);
+          ElevatedButton(
+            onPressed: () {
+              firestoreService.addNote(textController.text);
 
+              textController.clear();
 
-            textController.clear();
-
-            Navigator.pop(context);
-          },
-           child: Text("Add")
-          )
+              Navigator.pop(context);
+            },
+            child: Text("Add"),
+          ),
         ],
-
-    ),
+      ),
     );
   }
 
@@ -50,6 +42,32 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: openNoteBox,
         child: const Icon(Icons.add),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: firestoreService.getNotesStream(),
+        builder: (context, snapshot) {
+          //  Se tiver dados, pegarei tudo
+          if (snapshot.hasData) {
+            List notesList = snapshot.data!.docs;
+
+            // Mostrar como uma lista
+            return ListView.builder(
+              itemCount: notesList.length,
+              itemBuilder: (context, index) {
+                DocumentSnapshot document = notesList[index];
+                String docID = document.id;
+
+                Map<String, dynamic> data =
+                    document.data() as Map<String, dynamic>;
+                String noteText = data['note'];
+
+                return ListTile(title: Text(noteText));
+              },
+            );
+          } else {
+            return const Text("Sem notas, mermão!");
+          }
+        },
       ),
     );
   }

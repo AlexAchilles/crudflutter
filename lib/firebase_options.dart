@@ -23,15 +23,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         return windows;
       case TargetPlatform.linux:
@@ -52,6 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '773351997814',
     projectId: 'crud-flutterbah',
     authDomain: 'crud-flutterbah.firebaseapp.com',
+    databaseURL: 'https://crud-flutterbah-default-rtdb.firebaseio.com',
     storageBucket: 'crud-flutterbah.firebasestorage.app',
     measurementId: 'G-PBZE4Q1LNM',
   );
@@ -61,6 +56,7 @@ class DefaultFirebaseOptions {
     appId: '1:773351997814:android:4e5b91153d797b97047a57',
     messagingSenderId: '773351997814',
     projectId: 'crud-flutterbah',
+    databaseURL: 'https://crud-flutterbah-default-rtdb.firebaseio.com',
     storageBucket: 'crud-flutterbah.firebasestorage.app',
   );
 
@@ -70,7 +66,28 @@ class DefaultFirebaseOptions {
     messagingSenderId: '773351997814',
     projectId: 'crud-flutterbah',
     authDomain: 'crud-flutterbah.firebaseapp.com',
+    databaseURL: 'https://crud-flutterbah-default-rtdb.firebaseio.com',
     storageBucket: 'crud-flutterbah.firebasestorage.app',
     measurementId: 'G-LWN16Z6GSM',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD7uzyy3ddjc5gN4mhImMB3LbyeTe4eA-c',
+    appId: '1:773351997814:ios:8fa61f8ee72f9feb047a57',
+    messagingSenderId: '773351997814',
+    projectId: 'crud-flutterbah',
+    databaseURL: 'https://crud-flutterbah-default-rtdb.firebaseio.com',
+    storageBucket: 'crud-flutterbah.firebasestorage.app',
+    iosBundleId: 'com.example.crudflutter',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyD7uzyy3ddjc5gN4mhImMB3LbyeTe4eA-c',
+    appId: '1:773351997814:ios:8fa61f8ee72f9feb047a57',
+    messagingSenderId: '773351997814',
+    projectId: 'crud-flutterbah',
+    databaseURL: 'https://crud-flutterbah-default-rtdb.firebaseio.com',
+    storageBucket: 'crud-flutterbah.firebasestorage.app',
+    iosBundleId: 'com.example.crudflutter',
   );
 }

@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "773351997814",
+    "firebase_url": "https://crud-flutterbah-default-rtdb.firebaseio.com",
     "project_id": "crud-flutterbah",
     "storage_bucket": "crud-flutterbah.firebasestorage.app"
   },
