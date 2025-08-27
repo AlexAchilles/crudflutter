@@ -77,17 +77,27 @@ class _HomePageState extends State<HomePage> {
                 String docID = document.id;
 
                 Map<String, dynamic> data =
-                    document.data() as Map<String, dynamic>;
-                String noteText = data['note'];
-
+                    document.data() as Map<String, dynamic> ?? {};
+                String noteText = (data['note'] ?? "[sem texto]") as String;
+                print("Documento: ${document.id} => ${document.data()}");
                 return ListTile(
                   title: Text(noteText),
-                  trailing: IconButton(
-                    onPressed: () =>
-                        openNoteBox(docID: docID, currentText: noteText),
-                    icon: const Icon(Icons.settings),
+                  trailing: Wrap(
+                    spacing: 4,
+                    children: [
+                      IconButton(
+                        onPressed: () =>
+                            openNoteBox(docID: docID, currentText: noteText),
+                        icon: const Icon(Icons.settings),
+                      ),
+                      IconButton(
+                        onPressed: () => firestoreService.deleteNote(docID),
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ],
                   ),
                 );
+                ;
               },
             );
           } else {
